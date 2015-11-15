@@ -6,6 +6,20 @@
 #+LATEX_HEADER: \location{Portland, OR}
 
 * Colophon                                                         :noexport:
+This is my resume, done as an [[http://orgmode.org/][Emacs Org-Mode]] document. Eventually, the idea is
+to be able to use a combination of properties, Org [[http://orgmode.org/manual/Sparse-trees.html][sparse trees]], and the Org
+[[http://orgmode.org/manual/Exporting.html][export framework]] to be able to generate resumes of a variety of different shapes
+(one page or two, CV, music vs. professional) in an array of different formats
+(html, markdown, pdf).
+
+Right now, this is pretty much just a hot mess.
+
+** Notes
+There's a bunch of parts I'm using in here. This is as much for me as for the
+curious -- putting things where I can find them later.
+
+- [[http://orgmode.org/manual/Using-the-mapping-API.html#Using-the-mapping-API][The Org Mapping API]]
+- [[http://orgmode.org/manual/Using-the-property-API.html#Using-the-property-API][The Org Property API]]
 
 * Functions and Hooks                                              :noexport:
 The custom ~resume.cls~ class wont be usable unless it's in ~org-latex-classes~. We
@@ -45,7 +59,28 @@ This from [[http://emacs.stackexchange.com/questions/156/emacs-function-to-conve
 
 One of Malabarba's very good ideas is an alist, ~(exporter-backend (property
 . fun-to-call-on-prop))~, defined with ~defcustom~. This is incredibly flexible --
-but I don't actually need that much flexibility.
+but I don't actually need that much flexibility. In my case, I want to be able
+to mark an entry as being of a particular type (i.e. ~employment~), and then have
+its properties edited/inserted a particular way. This means I need a map
+~(export-backend (marker-value . fun-to-call-on-all-pros))~, and a function
+that'll operate accordingly.
+#+BEGIN_SRC emacs-lisp
+  (defvar gastove/property-fn-map
+    '((latex ("employer" . (lambda () "not implemented")))))
+
+  (defun gastove/process-org-properties (backend)
+    "For each heading its called on, loads the properties, then
+    passes them to a provided function, which will format them for
+    export by BACKEND."
+    (let ((map (cdr (assoc backend gastove/property-fn-map)))
+          value)
+      (when map
+        (org-map-entries
+         (lambda ()
+           (dolist (it map)
+             (when (setq value (org-entry-get (point) (car it)))
+               (funcall (cdr it) (org-entry-properties (point))))))))))
+#+END_SRC
 * Test
 :PROPERTIES:
 :EMPLOYER: Urban Airship
