@@ -1,0 +1,53 @@
+#+AUTHOR: Ross M. Donaldson
+#+EMAIL: gastove@gmail.com
+#+PROPERTY: header-args :results output silent
+#+OPTIONS: prop:t
+#+LATEX_CLASS: resume
+#+LATEX_HEADER: \location{Portland, OR}
+
+* Colophon                                                         :noexport:
+
+* Functions and Hooks                                              :noexport:
+The custom ~resume.cls~ class wont be usable unless it's in ~org-latex-classes~. We
+also need, in the same definition, to provide numbered and unnumbered mappings
+for each level of header.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-latex-classes
+               '("resume"
+                 "\\documentclass{resume}
+                 [NO-DEFAULT-PACKAGES]"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+#+END_SRC
+
+This from [[http://emacs.stackexchange.com/questions/156/emacs-function-to-convert-an-arbitrary-org-property-into-an-arbitrary-string-na][Malabarba]]:
+#+BEGIN_SRC emacs-lisp
+  (defun endless/replace-org-property (backend)
+    "Convert org properties using `endless/org-property-mapping'.
+  Lookup BACKEND in `endless/org-property-mapping' for a list of
+  \(PROPERTY REPLACEMENT). For each healine being exported, if it has a
+  PROPERTY listed insert a string immediately after the healine given by
+      (format REPLACEMENT PROPERTY-VALUE)"
+    (let ((map (cdr (assoc backend endless/org-property-mapping)))
+          value replacement)
+      (when map
+        (org-map-entries
+         (lambda ()
+           (dolist (it map)
+             (save-excursion
+               (when (setq value (org-entry-get (point) (car it)))
+                 (funcall (cdr it) value)))))))))
+#+END_SRC
+
+One of Malabarba's very good ideas is an alist, ~(exporter-backend (property
+. fun-to-call-on-prop))~, defined with ~defcustom~. This is incredibly flexible --
+but I don't actually need that much flexibility.
+* Test
+:PROPERTIES:
+:EMPLOYER: Urban Airship
+:LOCATION: Portland, OR
+:END:
