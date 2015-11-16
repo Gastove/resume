@@ -10,3 +10,7 @@
     \end{tabular}
   \end{center}
 }
+
+\newcommand*{\poot}[4]{
+  #1 --- #2 --- #3--#4
+}

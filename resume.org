@@ -1,7 +1,6 @@
 #+AUTHOR: Ross M. Donaldson
 #+EMAIL: gastove@gmail.com
 #+PROPERTY: header-args :results output silent
-#+OPTIONS: prop:t
 #+LATEX_CLASS: resume
 #+LATEX_HEADER: \location{Portland, OR}
 
@@ -65,24 +64,44 @@ its properties edited/inserted a particular way. This means I need a map
 ~(export-backend (marker-value . fun-to-call-on-all-pros))~, and a function
 that'll operate accordingly.
 #+BEGIN_SRC emacs-lisp
+  (defun gastove/employment-block (props)
+    (let ((emp (cdr (assoc "EMPLOYER" props)))
+          (loc (cdr (assoc "LOCATION" props)))
+          (start-d (cdr (assoc "START-DATE" props)))
+          (end-d (cdr (assoc "END-DATE" props)))
+          (tpl "\\poot{%s}{%s}{%s}{%s}"))
+      (search-forward-regexp org-property-end-re)
+      (forward-char 1)
+      (insert (format tpl emp loc start-d end-d))))
+
+  (makunbound 'gastove/property-fn-map)
   (defvar gastove/property-fn-map
-    '((latex ("employer" . (lambda () "not implemented")))))
+    '((latex ("employment" . gastove/employment-block))))
 
   (defun gastove/process-org-properties (backend)
     "For each heading its called on, loads the properties, then
     passes them to a provided function, which will format them for
     export by BACKEND."
     (let ((map (cdr (assoc backend gastove/property-fn-map)))
-          value)
+          res-type f)
       (when map
         (org-map-entries
          (lambda ()
-           (dolist (it map)
-             (when (setq value (org-entry-get (point) (car it)))
-               (funcall (cdr it) (org-entry-properties (point))))))))))
+           (save-excursion
+             (when (setq res-type (org-entry-get (point) "KIND"))
+               (when (setq f (cdr (assoc res-type map)))
+                (funcall f (org-entry-properties (point)))))))))))
+
+  (add-hook 'org-export-before-processing-hook #'gastove/process-org-properties)
 #+END_SRC
+
 * Test
 :PROPERTIES:
 :EMPLOYER: Urban Airship
 :LOCATION: Portland, OR
+:START-DATE: 2015-01-01
+:END-DATE: 2015-10-01
+:KIND:     employment
 :END:
+
+Thus concludes the test.
