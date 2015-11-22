@@ -3,6 +3,19 @@
 \ProvidesClass{resume}[2015/11/14 Custom Resume Class]
 \LoadClass{article}
 
-\newcommand*{\employer}[4]{ % Employer, Location, Start Date, End Date
-  #1, #2 --- #3--#4
+\def\location#1{\def\@location{#1}}
+\def\email#1{\def\@email{#1}}
+
+%% Print a header for my resume
+\makeatletter
+\renewcommand{\maketitle}{%
+  \@author \\%
+  \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}} \\%
+  \begin{flushright}\@email --- \@location\end{flushright}%
+}
+\makeatother
+
+% Employer, Location, Start Date, End Date
+\newcommand*{\employer}[4]{%
+  #1, #2 --- #3--#4%
 }

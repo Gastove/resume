@@ -116,6 +116,11 @@ Need to create commands for:
 :MUSIC:    An experienced choral singer and capable baritone soloist
 :END:
 
+* Projects
+- Behavioral Analyst and lead usability researcher for :: Big Fish Casino,
+     Multiple-time \#1 Top-Grossing App, iTunes App Store; Top-Grossing Casino
+     App Worldwide (App Annie, 2013-14)
+
 * Experience
 
 ** Senior Data Scientist
@@ -135,6 +140,52 @@ poutine. Farm-to-table put a bird on it kogi disrupt, helvetica VHS chillwave
 vice. Bitters yuccie post-ironic, crucifix kogi chartreuse asymmetrical
 humblebrag.
 
+** Senior Data Scientist
+:PROPERTIES:
+:RESUME:   tech
+:SHAPE:    1page
+:LOCATION: Oakland, CA
+:KIND:     employment
+:EMPLOYER: Big Fish Games
+:END:
+Starting with business needs, developed metrics, instrumented them in server
+code, mined and processed raw data, created automatic visualizations with both
+in-house and third-party tools, and delivered results to designers, engineers,
+and stakeholders across the organization. Created and deployed new information
+channels to the entire user base. Developed powerful analytics tools using
+open-source solutions to get insights faster. Drove understanding of the user
+with usability research and data analytics. Modeled user information needs,
+conducted user research; brought both to the UI, UX, and game design processes.
+
+** Content Strategist and Information Architect
+:PROPERTIES:
+:SHAPE:    cv
+:RESUME:   tech
+:EMPLOYER: Modus Cooperandi
+:START-DATE: 2011-01-01
+:END-DATE: 2011-05-31
+:END:
+Initiated an extensive discovery process to articulate business identity,
+organizational objectives, and target users. Used this information to ground a
+content analysis (including content inventory, modelling of extant information
+architecture, and extrapolation of extant metadata), which in turn became the
+empirical backbone of a new information architecture and accompanying content
+strategy.
+
+** Owner and Proprietor
+:PROPERTIES:
+:EMPLOYER: Delicious Wheels
+:SHAPE:    cv
+:RESUME:   cv
+:START-DATE: 2009-05-01
+:END-DATE: 2010-12-13
+:END:
+Founded Delicious Wheels, a bicycle repair company doing all business by
+bicycle. Attended three farmer's markets per week for the entire summer with a
+complete bike shop's worth of tools and a portable work bench in tow. At
+markets, and during house-calls, provided repair services, education, and clear,
+logical opinions. Received a number of positive reviews in local magazines and
+blogs.
 ** Gabriel and Adam, _Die Schöpfung_ of Haydn
 :PROPERTIES:
 :RESUME:   music
@@ -147,6 +198,10 @@ humblebrag.
 
 - Data :: OMFG
 - PROG-RAMMING :: I have rammed so much prog
+- Storytelling :: Practiced, capable public speaker; excellent written
+     communication skills. Connects users with content, users and content with
+     designers, business and design needs with engineering, strategic and
+     tactical decision-makers with user behaviour
 
 * Education
 :PROPERTIES:
