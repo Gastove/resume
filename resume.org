@@ -1,9 +1,11 @@
 #+AUTHOR: Ross M. Donaldson
 #+EMAIL: gastove@gmail.com
+#+TITLE: Donaldson, Ross --- Resume
 #+PROPERTY: header-args :results output silent
 #+PROPERTY: RESUME_ALL tech music cv all
 #+PROPERTY: SHAPE_ALL 1page 2page cv all
 #+LATEX_CLASS: resume
+#+LATEX_HEADER: \email{gastove@gmail.com}
 #+LATEX_HEADER: \location{Portland, OR}
 
 * Colophon                                                         :noexport:
@@ -31,6 +33,7 @@ for each level of header.
   (add-to-list 'org-latex-classes
                '("resume"
                  "\\documentclass{resume}"
+                 "[EXTRA]"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -39,7 +42,7 @@ for each level of header.
 #+END_SRC
 
 This from [[http://emacs.stackexchange.com/questions/156/emacs-function-to-convert-an-arbitrary-org-property-into-an-arbitrary-string-na][Malabarba]]:
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :eval never
   (defun endless/replace-org-property (backend)
     "Convert org properties using `endless/org-property-mapping'.
   Lookup BACKEND in `endless/org-property-mapping' for a list of
