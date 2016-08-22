@@ -123,22 +123,45 @@ Need to create commands for:
 
 * Experience
 
+** Coordinator, Technologist in Residence
+:PROPERTIES:
+:EMPLOYER: Reed College
+:LOCATION: Portland, OR
+:START-DATE: 2016-01-15
+:END-DATE: Present
+:KIND:     employment
+:RESUME:   tech
+:END:
+
+I run the Reed College Software Design Studio, a one-year program during which
+students with a wide variety of backgrounds and experiences learn to code. I’ve
+developed and taught the curriculum, including python, object-oriented
+programming, version control, web development, relational databases (including
+both SQL and ORMs), basic command-line skills, and teamwork/communication
+skills. Recruited a large group of mentors from industry, and with their help
+lead the students working full-time for the summer on projects requested by the
+Reed community. At time of writing, all projects are set to finish successfully
+by end of year.
+
 ** Senior Data Scientist
 :PROPERTIES:
 :EMPLOYER: Urban Airship
 :LOCATION: Portland, OR
-:START-DATE: 2015-01-01
-:END-DATE: 2015-10-01
+:START-DATE: 2014-05-12
+:END-DATE: 2016-08-10
 :KIND:     employment
 :RESUME:   tech
 :END:
-Fixie hella plaid photo booth scenester meditation. Ugh ennui art party,
-gentrify cold-pressed meditation mumblecore lumbersexual quinoa hella
-readymade. Food truck knausgaard synth letterpress, mixtape bitters celiac jean
-shorts 3 wolf moon offal before they sold out twee gastropub aesthetic
-poutine. Farm-to-table put a bird on it kogi disrupt, helvetica VHS chillwave
-vice. Bitters yuccie post-ironic, crucifix kogi chartreuse asymmetrical
-humblebrag.
+
+Advocated for the benefit of a layers of abstraction over raw data; designed and
+implemented that abstraction in the form of an analytics-specific schema and a
+new data warehouse. Built, maintained, and evolved an ETL pipeline starting on
+owned metal and moving eventually to AWS. Created tooling for working with the
+data warehouse, implemented the Lifecycle Lists product on top of it. Modeled
+data for a secondary, customer-facing warehouse with strict performance
+requirements. Collaborated with Operations to construct a containerized logging
+system optimized for debugging customer issues.
+
 
 ** Senior Data Scientist
 :PROPERTIES:
@@ -147,7 +170,10 @@ humblebrag.
 :LOCATION: Oakland, CA
 :KIND:     employment
 :EMPLOYER: Big Fish Games
+:START-DATE: 2011-05-20
+:END-DATE: 2014-04-30
 :END:
+
 Starting with business needs, developed metrics, instrumented them in server
 code, mined and processed raw data, created automatic visualizations with both
 in-house and third-party tools, and delivered results to designers, engineers,
@@ -196,12 +222,19 @@ blogs.
 :RESUME:   tech
 :END:
 
-- Data :: OMFG
-- PROG-RAMMING :: I have rammed so much prog
+- Data Engineering :: Schema design, data modeling and warehousing, ETL
+     pipelines
+- Data Science :: Analytic-focused work including dashboards, analytic SQL, metric
+  design and instrumentation. Permanent, high-test plumnbing.
+- Information Science :: The natural complement to data science: what information
+  do we need to create, and why? How should it be exposed? User and
+     organizational information-needs modeling, information audit, user-centered
+     design; hackish, get-it-done-style plumbing.
+- Programming :: Tidy, re-usable code; strong relationship with version control. Functional programming. Unit testing, documentation.
 - Storytelling :: Practiced, capable public speaker; excellent written
      communication skills. Connects users with content, users and content with
      designers, business and design needs with engineering, strategic and
-     tactical decision-makers with user behaviour
+     tactical decision-makers with user behavior
 
 * Education
 :PROPERTIES:
@@ -211,10 +244,27 @@ blogs.
      Science in Information Management
 - Reed College, Portland, OR, 2006 :: Bachelor of Arts in Music, with thesis.
 
-* Languages and Tools
+* Languages
 :PROPERTIES:
 :RESUME:   tech
 :END:
-- Good :: Clojure, Python, Scala, Hadoop, Scalding, SQL, *nix tools
-- Useful :: R, Java, Chronos/Mesos, JavaScript
-- Have Successfully Hacked :: AWS, HBase, Kafka
+- Good :: Clojure, Python, Scala, SQL
+- OK :: Java, F#, R, Ruby, Go, JavaScript
+
+* Tools
+:PROPERTIES:
+:RESUME:   tech
+:END:
+- Good :: Git, Unix/Linux, Postgres, MySQL, Hadoop, Cascading, Scalding, RedShift, EMR, Netezza
+- Also ::  Misc other AWS, HBase, Kafka, Chronos, Mesos
+
+* Extra-Curricular
+:PROPERTIES:
+:RESUME:   tech
+:END:
+
+- Cook :: Roasting, bread baking, beer brewing. Peasant cuisine, sous-vide. Canning/preserving/fermenting. Bicycles Touring cyclist; bicycle repair and education
+- Bartender :: Classic and bottled cocktails, sake, craft beer, whiskey
+- Singer :: Opera, chamber choirs
+- Games :: Tabletop RPGs, Xbox, PC
+- Also :: Hiking, backpacking, powerlifting, knitting
