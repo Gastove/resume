@@ -7,6 +7,7 @@
 #+LATEX_CLASS: resume
 #+LATEX_HEADER: \email{gastove@gmail.com}
 #+LATEX_HEADER: \location{Portland, OR}
+#+LATEX_HEADER: \wobsite{\href{http://gastove.com}{csv.rodeo}}
 
 * Colophon                                                         :noexport:
 This is my resume, done as an [[http://orgmode.org/][Emacs Org-Mode]] document. Eventually, the idea is
@@ -68,22 +69,35 @@ its properties edited/inserted a particular way. This means I need a map
 ~(export-backend (marker-value . fun-to-call-on-all-pros))~, and a function
 that'll operate accordingly.
 #+BEGIN_SRC emacs-lisp
+  (defun gastove/insert-after-props (s)
+    (search-forward-regexp org-property-end-re)
+    (forward-char 1)
+    (insert s))
+
+  (defun gastove/insert-at-end-of-heading (s)
+    (end-of-line)
+    (insert s))
+
   (defun gastove/employment-block (props)
     (let ((emp (cdr (assoc "EMPLOYER" props)))
           (loc (cdr (assoc "LOCATION" props)))
           (start-d (cdr (assoc "START-DATE" props)))
           (end-d (cdr (assoc "END-DATE" props)))
           (tpl "\\employer{%s}{%s}{%s}{%s}"))
-      (search-forward-regexp org-property-end-re)
-      (forward-char 1)
-      (insert (format tpl emp loc start-d end-d))))
+      (gastove/insert-at-end-of-heading (format tpl emp loc start-d end-d))))
+
+  ;; TODO: Stop hard-coding which statement to use... somehow
+  (defun gastove/statement-block (props)
+    (let ((statement (cdr (assoc "TECH" props))))
+      (gastove/insert-at-end-of-heading (format "\\statement{%s}" statement))))
 
   ;; During development, if the fn-map needs to be chanced, it'll need to be
   ;; unbound each time. Whee.
   ;;
   ;; (makunbound 'gastove/property-fn-map)
   (defvar gastove/property-fn-map
-    '((latex ("employment" . gastove/employment-block))))
+    '((latex ("employment" . gastove/employment-block)
+             ("statement"  . gastove/statement-block))))
 
   (defun gastove/process-org-properties (backend)
     "For each heading its called on, loads the properties, then
@@ -134,17 +148,20 @@ Need to create commands for:
 :END-DATE: Present
 :KIND:     employment
 :RESUME:   tech
+:SHAPE:    2page
 :END:
 
 I run the Reed College Software Design Studio, a one-year program during which
-students with a wide variety of backgrounds and experiences learn to code. I’ve
-developed and taught the curriculum, including python, object-oriented
-programming, version control, web development, relational databases (including
-both SQL and ORMs), basic command-line skills, and teamwork/communication
-skills. Recruited a large group of mentors from industry, and with their help
-lead the students working full-time for the summer on projects requested by the
-Reed community. At time of writing, all projects are set to finish successfully
-by end of year.
+students with a wide variety of backgrounds and experiences learn to code.
+
+- Developed and taught the curriculum, including python, object-oriented
+  programming, version control, web development, relational databases (including
+  both SQL and ORMs), basic command-line skills, and teamwork/communication
+  skills.
+- Recruited a large group of mentors from industry, and with their help lead the
+  students working full-time for the summer on projects requested by the Reed
+  community. At time of writing, all projects are set to finish successfully by
+  end of year.
 
 ** Senior Data Scientist
 :PROPERTIES:
@@ -154,22 +171,23 @@ by end of year.
 :END-DATE: 2016-08-10
 :KIND:     employment
 :RESUME:   tech
+:SHAPE:    2page
 :END:
 
-Advocated for the benefit of a layers of abstraction over raw data; designed and
-implemented that abstraction in the form of an analytics-specific schema and a
-new data warehouse. Built, maintained, and evolved an ETL pipeline starting on
-owned metal and moving eventually to AWS. Created tooling for working with the
-data warehouse, implemented the Lifecycle Lists product on top of it. Modeled
-data for a secondary, customer-facing warehouse with strict performance
-requirements. Collaborated with Operations to construct a containerized logging
-system optimized for debugging customer issues.
-
+- Advocated for the benefit of a layers of abstraction over raw data; designed
+  and implemented that abstraction in the form of an analytics-specific schema
+  and a new data warehouse.
+- Built, maintained, and evolved an ETL pipeline starting on owned metal and
+  moving eventually to AWS. Created tooling for working with the data warehouse,
+  implemented the Lifecycle Lists product on top of it.
+- Modeled data for a secondary, customer-facing warehouse with strict performance requirements.
+- Collaborated with Operations to construct a containerized logging system
+  optimized for debugging customer issues.
 
 ** Senior Data Scientist
 :PROPERTIES:
 :RESUME:   tech
-:SHAPE:    1page
+:SHAPE:    2page
 :LOCATION: Oakland, CA
 :KIND:     employment
 :EMPLOYER: Big Fish Games
@@ -177,14 +195,16 @@ system optimized for debugging customer issues.
 :END-DATE: 2014-04-30
 :END:
 
-Starting with business needs, developed metrics, instrumented them in server
-code, mined and processed raw data, created automatic visualizations with both
-in-house and third-party tools, and delivered results to designers, engineers,
-and stakeholders across the organization. Created and deployed new information
-channels to the entire user base. Developed powerful analytics tools using
-open-source solutions to get insights faster. Drove understanding of the user
-with usability research and data analytics. Modeled user information needs,
-conducted user research; brought both to the UI, UX, and game design processes.
+- Starting with business needs, developed metrics, instrumented them in server
+  code, mined and processed raw data, created automatic visualizations with both
+  in-house and third-party tools, and delivered results to designers, engineers,
+  and stakeholders across the organization.
+- Created and deployed new information channels to the entire user base.
+- Developed powerful analytics tools using open-source solutions to get insights
+  faster.
+- Drove understanding of the user with usability research and data analytics.
+- Modeled user information needs, conducted user research; brought both to the
+  UI, UX, and game design processes.
 
 ** Content Strategist and Information Architect
 :PROPERTIES:

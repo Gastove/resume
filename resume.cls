@@ -21,31 +21,38 @@
 %%%%% Functions %%%%%
 \def\location#1{\def\@location{#1}}
 \def\email#1{\def\@email{#1}}
+\def\wobsite#1{\def\@wobsite{#1}}
 
 %% Resume header
 \makeatletter
 \renewcommand{\maketitle}{%
-  \Large%
+  \large%
   \setlength{\parskip}{-0.5em}
   \textbf{\@author}%
   \par
-  \large%
+  \normalsize%
   \setlength{\leftskip}{0em}
   \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}%
-  %\setlength{\parskip}{-0.5em}%
+  % \setlength{\parskip}{-0.5em}%
   \par
-  \begin{flushright}\@email\:--- \@location\end{flushright}%
-    \normalsize%
-    \setlength{\parskip}{0em}
+  \begin{flushright}\@email\:--- \@location\:--- \@wobsite\end{flushright}%
+  \normalsize%
+  \setlength{\parskip}{0em}
 }
 \makeatother
 
 %% Print a personal statement
-\newcommand{\statement}[1]{#1}
+\newcommand{\statement}[1]{%
+  \normalsize%
+  \normalfont%
+  \space#1%
+}
 
 % Employer, Location, Start Date, End Date
 \newcommand*{\employer}[4]{%
-  \begin{flushright}%
-    #1, #2 --- #3/#4\par%
-  \end{flushright}
+  \normalsize%
+  \normalfont%
+  % \begin{flushright}%
+  \hfill#1, #2 --- #3/#4\par%
+  % \end{flushright}
 }
