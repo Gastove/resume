@@ -1,22 +1,30 @@
 %%%%% Resume! %%%%%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{resume}[2015/11/14 Custom Resume Class]
-\LoadClass{article}
+\def\@@ptsize{10pt}
+\LoadClass[\@@ptsize]{article}
 
 %%%%% Packages %%%%%
 \RequirePackage[left=1in, right=1in, top=1in, bottom=1in]{geometry}
 \RequirePackage{titlesec}
 \RequirePackage{enumitem}
+\RequirePackage{xcolor}
 
 %%%%% Style %%%%%
+\setlength{\parskip}{0em}
 \setlength{\parindent}{1em}
 \setlength{\leftskip}{3em}
+\setlist[itemize]{itemsep=0em}
+\setlist[description]{style=standard, leftmargin=3em, labelindent=\parindent, font=\normalfont\sc}
 
-\setlist[description]{style=standard, leftmargin=\parindent, labelindent=\parindent}
+\raggedright
 
 %% Section Formatting
-\titleformat{\section}{\large\bfseries}{}{0em}{}
-\titleformat{\subsection}{\bfseries}{}{0em}{}
+\titlespacing{\section}{0em}{1em}{0.5em}
+\titleformat{\section}{}{}{0em}{}[{\color{gray} \titlerule[0.2pt]}]
+\titleformat{\subsection}{\sc}{}{0em}{}
+\titleformat{\subsubsection}{\sc}{}{0em}{}
+% \setcounter{secnumdepth}{0}
 
 %%%%% Functions %%%%%
 \def\location#1{\def\@location{#1}}
@@ -27,9 +35,9 @@
 \makeatletter
 \renewcommand{\maketitle}{%
   \large%
-  \setlength{\parskip}{-0.5em}
-  \textbf{\@author}%
-  \par
+  \setlength{\parskip}{-1.5em}%
+  \begin{flushleft}\sc{\@author}\end{flushleft}%
+  \par%
   \normalsize%
   \setlength{\leftskip}{0em}
   \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}%
@@ -53,6 +61,6 @@
   \normalsize%
   \normalfont%
   % \begin{flushright}%
-  \hfill#1, #2 --- #3/#4\par%
-  % \end{flushright}
+  \hfill#1, #2 --- #3/#4%
+  % \end{flushright}%
 }

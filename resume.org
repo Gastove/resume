@@ -8,6 +8,7 @@
 #+LATEX_HEADER: \email{gastove@gmail.com}
 #+LATEX_HEADER: \location{Portland, OR}
 #+LATEX_HEADER: \wobsite{\href{http://gastove.com}{csv.rodeo}}
+#+OPTIONS: num:t
 
 * Colophon                                                         :noexport:
 This is my resume, done as an [[http://orgmode.org/][Emacs Org-Mode]] document. Eventually, the idea is
@@ -33,8 +34,8 @@ for each level of header.
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-latex-classes
                '("resume"
-                 "\\documentclass{resume}"
-                 "[EXTRA]"
+                 "\\documentclass{resume}
+                 [EXTRA]"
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -68,6 +69,7 @@ to mark an entry as being of a particular type (i.e. ~employment~), and then hav
 its properties edited/inserted a particular way. This means I need a map
 ~(export-backend (marker-value . fun-to-call-on-all-pros))~, and a function
 that'll operate accordingly.
+
 #+BEGIN_SRC emacs-lisp
   (defun gastove/insert-after-props (s)
     (search-forward-regexp org-property-end-re)
@@ -81,8 +83,8 @@ that'll operate accordingly.
   (defun gastove/employment-block (props)
     (let ((emp (cdr (assoc "EMPLOYER" props)))
           (loc (cdr (assoc "LOCATION" props)))
-          (start-d (cdr (assoc "START-DATE" props)))
-          (end-d (cdr (assoc "END-DATE" props)))
+          (start-d (cdr (assoc "START_DATE" props)))
+          (end-d (cdr (assoc "END_DATE" props)))
           (tpl "\\employer{%s}{%s}{%s}{%s}"))
       (gastove/insert-at-end-of-heading (format tpl emp loc start-d end-d))))
 
@@ -91,7 +93,7 @@ that'll operate accordingly.
     (let ((statement (cdr (assoc "TECH" props))))
       (gastove/insert-at-end-of-heading (format "\\statement{%s}" statement))))
 
-  ;; During development, if the fn-map needs to be chanced, it'll need to be
+  ;; During development, if the fn-map needs to be changed, it'll need to be
   ;; unbound each time. Whee.
   ;;
   ;; (makunbound 'gastove/property-fn-map)
@@ -129,36 +131,81 @@ Need to create commands for:
 * I am:
 :PROPERTIES:
 :KIND:     statement
-:TECH:     A data scientist, generalist programmer, enthusiastic and systematic problem solver
+:TECH:     A data scientist and engineer, generalist programmer, software development educator, enthusiastic and systematic problem solver. It is always the right time to help the people around you level up.
 :MUSIC:    An experienced choral singer and capable baritone soloist
 :END:
 
 * Projects
+:PROPERTIES:
+:RESUME:   cv
+:END:
 - Behavioral Analyst and lead usability researcher for :: Big Fish Casino,
      Multiple-time \#1 Top-Grossing App, iTunes App Store; Top-Grossing Casino
      App Worldwide (App Annie, 2013-14)
 
 * Experience
 
+** Staff Software Engineer, Infrastructure
+:PROPERTIES:
+:EMPLOYER: Squarespace
+:START_DATE: 2018-04-21
+:END_DATE: Present
+:RESUME:   tech
+:SHAPE:    2page
+:KIND:     employment
+:LOCATION: Portland, OR
+:END:
+
+- Built out Squarespace's internal Code Camp. Designed and wrote curriculum, trained other instructors, taught classes, recruited promising graduates into entry-level engineering positions. At time of writing, approx. 90 students have been through Code Camp, with 30% moving into more technical roles, and almost 10% hired into engineering roles.
+- Replaced legacy monolith-only caching system with a fully self-service solution that is high-performance, fault tolerant, scalable, and accessible to any application.
+- Served as an SRE embedded with our Data Engineering teams. Worked to help DE onboard onto SRE platform while advocating within SRE for DEs needs. Improved DE platform stability, strengthened SRE/DE relationship. Wrote and deployed a Kubernetes operator for managing self-service Apache Airflow instances.
+
+** Senior Data Engineer
+:PROPERTIES:
+:EMPLOYER: Disqus
+:START_DATE: 2016-10-17
+:END_DATE: 2018-03-15
+:RESUME:   tech
+:SHAPE:    2page
+:KIND:     employment
+:LOCATION: Portland, OR
+:END:
+
+- Implemented a new resolution service, providing a 12% lift in user
+  identifications to advertising partners.
+- Empowered Disqus to ask data-driven question by deploying Jupyter Hub +
+  tooling in to production, teaching a day-long Python/pandas intensive. Worked
+  closely with analytics to help transition off non-performant Excel tooling.
+- Substantive improvements to performance and stability across existing systems.
+- Designed and lead a rebuild of Disqus' massive, legacy ETL system,
+
 ** Coordinator, Technologist in Residence
 :PROPERTIES:
 :EMPLOYER: Reed College
 :LOCATION: Portland, OR
-:START-DATE: 2016-01-15
-:END-DATE: Present
+:START_DATE: 2016-01-15
+:END_DATE: Present
 :KIND:     employment
 :RESUME:   tech
 :SHAPE:    2page
 :END:
 
-I run the Reed College Software Design Studio, a one-year program during which
-students with a wide variety of backgrounds and experiences learn to code.
+/The Software Design Studio is a one-year program during which students learn to
+code and then work as software developers./
 
+- Took leadership of the SDS in the second year of its 3-year pilot and was
+  tasked with turning it around after a challenging first year. Now in year
+  three, the program is successful and on-track for funding in perpetuity.
+- Recruited students to the program, with a strong emphasis towards giving
+  students who wouldn’t otherwise have the chance the opportunity to learn to
+  code. As a result, the program is majority non-male and majority non-CS-major.
 - Developed and taught the curriculum, including python, object-oriented
   programming, version control, web development, relational databases (including
-  both SQL and ORMs), basic command-line skills, and teamwork/communication
-  skills.
-- Recruited a large group of mentors from industry, and with their help lead the
+  both SQL and ORMs), Unix command-line proficiency, and teamwork/communication
+  skills. Wrote ~35k words of educational and reference materials for the
+  students.
+- Brought in guest speakers and teachers on product design, product management,
+- Enlisted a large group of mentors from industry, and with their help lead the
   students working full-time for the summer on projects requested by the Reed
   community. At time of writing, all projects are set to finish successfully by
   end of year.
@@ -167,16 +214,16 @@ students with a wide variety of backgrounds and experiences learn to code.
 :PROPERTIES:
 :EMPLOYER: Urban Airship
 :LOCATION: Portland, OR
-:START-DATE: 2014-05-12
-:END-DATE: 2016-08-10
+:START_DATE: 2014-05-12
+:END_DATE: 2016-08-10
 :KIND:     employment
 :RESUME:   tech
 :SHAPE:    2page
 :END:
 
-- Advocated for the benefit of a layers of abstraction over raw data; designed
-  and implemented that abstraction in the form of an analytics-specific schema
-  and a new data warehouse.
+- Introduced layers of abstraction over raw data; designed and implemented that
+  abstraction in the form of an analytics-specific schema and a new data
+  warehouse.
 - Built, maintained, and evolved an ETL pipeline starting on owned metal and
   moving eventually to AWS. Created tooling for working with the data warehouse,
   implemented the Lifecycle Lists product on top of it.
@@ -191,8 +238,8 @@ students with a wide variety of backgrounds and experiences learn to code.
 :LOCATION: Oakland, CA
 :KIND:     employment
 :EMPLOYER: Big Fish Games
-:START-DATE: 2011-05-20
-:END-DATE: 2014-04-30
+:START_DATE: 2011-05-20
+:END_DATE: 2014-04-30
 :END:
 
 - Starting with business needs, developed metrics, instrumented them in server
@@ -211,8 +258,8 @@ students with a wide variety of backgrounds and experiences learn to code.
 :SHAPE:    cv
 :RESUME:   tech
 :EMPLOYER: Modus Cooperandi
-:START-DATE: 2011-01-01
-:END-DATE: 2011-05-31
+:START_DATE: 2011-01-01
+:END_DATE: 2011-05-31
 :END:
 Initiated an extensive discovery process to articulate business identity,
 organizational objectives, and target users. Used this information to ground a
@@ -226,8 +273,8 @@ strategy.
 :EMPLOYER: Delicious Wheels
 :SHAPE:    cv
 :RESUME:   cv
-:START-DATE: 2009-05-01
-:END-DATE: 2010-12-13
+:START_DATE: 2009-05-01
+:END_DATE: 2010-12-13
 :END:
 Founded Delicious Wheels, a bicycle repair company doing all business by
 bicycle. Attended three farmer's markets per week for the entire summer with a
@@ -243,18 +290,19 @@ blogs.
 * Skills
 :PROPERTIES:
 :RESUME:   tech
+:SHAPE:    all
 :END:
 
-- Data Engineering :: Schema design, data modeling and warehousing, ETL
-     pipelines
-- Data Science :: Analytic-focused work including dashboards, analytic SQL, metric
-  design and instrumentation. Permanent, high-test plumnbing.
-- Information Science :: The natural complement to data science: what information
+- Software Engineering: :: Tidy, re-usable code; strong relationship with version control. Functional programming. Unit testing, documentation.
+- Information Science: :: The natural complement to data science: what information
   do we need to create, and why? How should it be exposed? User and
-     organizational information-needs modeling, information audit, user-centered
-     design; hackish, get-it-done-style plumbing.
-- Programming :: Tidy, re-usable code; strong relationship with version control. Functional programming. Unit testing, documentation.
-- Storytelling :: Practiced, capable public speaker; excellent written
+  organizational information-needs modeling, information audit, user-centered
+  design; hackish, get-it-done-style plumbing (as needed).
+- Data Engineering: :: Schema design, data modeling and warehousing, ETL
+     pipelines
+- Data Science: :: Analytic-focused work including dashboards, analytic SQL, metric
+  design and instrumentation. Permanent, high-test plumnbing.
+- Storytelling: :: Practiced, capable public speaker; excellent written
      communication skills. Connects users with content, users and content with
      designers, business and design needs with engineering, strategic and
      tactical decision-makers with user behavior
@@ -270,24 +318,28 @@ blogs.
 * Languages
 :PROPERTIES:
 :RESUME:   tech
+:SHAPE:    2page
 :END:
-- Good :: Clojure, Python, Scala, SQL
-- OK :: Java, F#, R, Ruby, Go, JavaScript
+- Good: :: Rust, Golang, F#, Clojure, Python, Java, SQL
+- OK: :: Scala, R, Emacs Lisp, JavaScript
 
 * Tools
 :PROPERTIES:
 :RESUME:   tech
+:SHAPE:    2page
 :END:
-- Good :: Git, Unix/Linux, Postgres, MySQL, Hadoop, Cascading, Scalding, RedShift, EMR, Netezza
-- Also ::  Misc other AWS, HBase, Kafka, Chronos, Mesos
+- Good: :: Git, Unix/Linux, Postgres, Hadoop (Cascading, Scalding, Hive)
+           RedShift, EMR, Netezza, Jupyter, Org
+- Also: ::  Misc other AWS, HBase, Kafka, Chronos, Mesos
 
 * Extra-Curricular
 :PROPERTIES:
 :RESUME:   tech
+:SHAPE:    2page
 :END:
 
-- Cook :: Roasting, bread baking, beer brewing. Peasant cuisine, sous-vide. Canning/preserving/fermenting. Bicycles Touring cyclist; bicycle repair and education
-- Bartender :: Classic and bottled cocktails, sake, craft beer, whiskey
-- Singer :: Opera, chamber choirs
-- Games :: Tabletop RPGs, Xbox, PC
-- Also :: Hiking, backpacking, powerlifting, knitting
+- Cook: :: Roasting, bread baking, beer brewing. Peasant cuisine, sous-vide. Canning/preserving/fermenting. Bicycles Touring cyclist; bicycle repair and education
+- Bartender: :: Classic and bottled cocktails, sake, craft beer, whiskey
+- Singer: :: Opera, chamber choirs
+- Games: :: Tabletop RPGs, Xbox, PC
+- Also: :: Hiking, backpacking, powerlifting, knitting
